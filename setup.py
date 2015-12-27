@@ -13,6 +13,7 @@ setup(
     install_requires=[
         'nose',
         'selenium',
+        'selenium-extra-api',
     ],
     entry_points={
         'nose.plugins.0.10': [
