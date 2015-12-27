@@ -1,5 +1,6 @@
 import logging
 from anybox.nose_selenium.selenium import SeleniumTestCase
+from unittest import TestCase
 
 log = logging.getLogger(__name__)
 
@@ -14,12 +15,23 @@ class MyTestCase(SeleniumTestCase):
         super(MyTestCase, self).setUp()
         self.log_message("setUp", self)
 
-    def test_python_web_site(self):
+    def test_python_website(self):
         self.log_message("test_python_web_site", self)
         self.driver.get('https://www.python.org/')
+        self.assertEquals(self.driver.title, 'Welcome to Python.org')
+
+    def test_anybox_website(self):
+        self.log_message("test_anybox_site", self)
+        self.driver.get('https://anybox.fr/')
         self.assertEquals(self.driver.title, 'Welcome to Python.org')
 
     @classmethod
     def log_message(self, method, obj):
         log.info(" driver id: %r - %s - instance %r", hex(id(obj.driver)),
                  method, obj)
+
+
+class NormalTestCase(TestCase):
+
+    def test_basic(self):
+        self.assertTrue(True)

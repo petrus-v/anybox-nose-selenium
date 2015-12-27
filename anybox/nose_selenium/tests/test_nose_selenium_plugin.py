@@ -33,26 +33,37 @@ class TestNoseSeleniumPluginMonoProcess(PluginTester, TestCase):
 
     def runTest(self):
         print str(self.output)
-        assert 'test_python_web_site (examples.test_simple_case.' \
+        assert 'test_python_website (examples.test_simple_case.' \
                'firefox_sp_MyTestCase) ... ok' in self.output
-        assert 'test_python_web_site (examples.test_simple_case.' \
+        assert 'test_python_website (examples.test_simple_case.' \
                'chrome_sp_MyTestCase) ... ok' in self.output
-        assert 'Ran 2 tests in' in self.output
+        assert 'test_anybox_website (examples.test_simple_case.' \
+               'firefox_sp_MyTestCase) ... ok' in self.output
+        assert 'test_anybox_website (examples.test_simple_case.' \
+               'chrome_sp_MyTestCase) ... ok' in self.output
+        assert 'test_basic (examples.test_simple_case.' \
+               'NormalTestCase) ... ok' in self.output
+        assert 'Ran 5 tests in' in self.output
 
 # TODO: figure out why this unit test is not working as it's working
 #       when lanching it manually
 # class TestNoseSeleniumPluginMultiProcesses(PluginTester, TestCase):
 #     activate = '--with-selenium'
 #     plugins = [Selenium(), MultiProcess()]
-#     args = ['--verbose', '--processes', '2', '--process-timeout', '5']
+#     args = ['--verbose', '--processes', '2', '--process-timeout', '10']
 #     suitepath = os.path.abspath(os.path.join(
 #             os.path.dirname(__file__), '..', '..', '..', 'examples'))
 #
 #     def runTest(self):
 #         print str(self.output)
-#         import pdb; pdb.set_trace()
 #         assert 'test_python_web_site (examples.test_simple_case.' \
 #                'firefox_sp_MyTestCase) ... ok' in self.output
 #         assert 'test_python_web_site (examples.test_simple_case.' \
 #                'chrome_sp_MyTestCase) ... ok' in self.output
-#         assert 'Ran 2 tests in' in self.output
+#         assert 'test_anybox_web_site (examples.test_simple_case.' \
+#                'firefox_sp_MyTestCase) ... ok' in self.output
+#         assert 'test_anybox_web_site (examples.test_simple_case.' \
+#                'chrome_sp_MyTestCase) ... ok' in self.output
+#         assert 'test_basic (examples.test_simple_case.' \
+#                'NormalTestCase) ... ok' in self.output
+#         assert 'Ran 5 tests in' in self.output

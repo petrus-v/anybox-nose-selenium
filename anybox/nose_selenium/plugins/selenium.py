@@ -2,7 +2,7 @@ import logging
 import os
 from anybox.nose_selenium.selenium import Driver, SeleniumTestCase
 from nose.plugins import Plugin
-
+from nose.loader import TestLoader
 
 log = logging.getLogger(__name__)
 # on SkipTest:
@@ -25,6 +25,7 @@ except ImportError:
 
 class Selenium(Plugin):
     name = 'selenium'
+    loader = None
 
     def options(self, parser, env=os.environ):
         super(Selenium, self).options(parser, env=env)
@@ -59,9 +60,9 @@ class Selenium(Plugin):
             else:
                 if self.skip:
                     testCaseClass = SkipTest
-                testCaseNames = loader.getTestCaseNames(testCaseClass)
-                if not testCaseNames and hasattr(testCaseClass, 'runTest'):
-                    testCaseNames = ['runTest']
+                test_case_names = loader.getTestCaseNames(testCaseClass)
+                if not test_case_names and hasattr(testCaseClass, 'runTest'):
+                    test_case_names = ['runTest']
                 for driver in self.drivers:
 
                     class A(testCaseClass):
@@ -72,8 +73,8 @@ class Selenium(Plugin):
                     new_class.__name__ = "%s_sp_%s" % (driver.name,
                                                        testCaseClass.__name__)
                     new_class.__module__ = testCaseClass.__module__
-                    loaded_suite.append(loader.suiteClass(map(new_class,
-                                                              testCaseNames)))
+                    loaded_suite.append(loader.suiteClass(
+                        map(new_class, test_case_names)))
             suites = loader.suiteClass(loaded_suite)
             return suites
 
@@ -93,11 +94,13 @@ class Selenium(Plugin):
             prefix = 'chrome_sp_'
             name = name[len(prefix):]
             driver = self.drivers[1]
-        if not driver:
+        if not driver or not module:
             return
         parts = name.split(".")
         class_name = parts[0]
-        method_name = parts[1]
+        method_name = None
+        if len(parts) >= 2:
+            method_name = parts[1]
         test_case_class = getattr(module, class_name)
         assert isinstance(test_case_class, object)
 
@@ -108,4 +111,11 @@ class Selenium(Plugin):
         new_class.driver = driver
         new_class.__name__ = "%s%s" % (prefix, class_name)
         new_class.__module__ = test_case_class.__module__
-        yield new_class(method_name)
+        if method_name:
+            yield new_class(method_name)
+        else:
+            loader = TestLoader()
+            test_case_names = loader.getTestCaseNames(new_class)
+            if not test_case_names and hasattr(new_class, 'runTest'):
+                test_case_names = ['runTest']
+            yield loader.suiteClass(map(new_class, test_case_names))
