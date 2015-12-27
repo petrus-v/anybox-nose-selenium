@@ -97,11 +97,7 @@ class Selenium(Plugin):
             driver = self.drivers[1]
         if not driver or not module:
             return
-        print prefix, name
         parts = name.split(".")
-        if len(parts) < 2:
-            print "****************** GRRRRRRR ***********"
-            return
         class_name = parts[0]
         method_name = None
         if len(parts) >= 2:
