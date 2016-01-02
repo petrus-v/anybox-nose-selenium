@@ -3,8 +3,8 @@ from setuptools import setup
 setup(
     name='anybox-nose-selenium',
     version='0.0.1',
-    descritption='anybox-nose-selenium is a plugin for nose that provides '
-                 'support to launch selenium tests.',
+    description='anybox-nose-selenium is a plugin for nose that provides '
+                'support to launch selenium tests.',
     long_description=open('README.rst').read(),
     author='Pierre Verkest',
     author_email='pverkest@anybox.fr',
@@ -16,8 +16,7 @@ setup(
         'selenium-extra-api',
     ],
     dependency_links=[
-        'https://github.com/petrus-v/selenium-extra-api.git@master#'
-        'egg=selenium-extra-api',
+        'http://github.com/petrus-v/selenium-extra-api.git@master#egg=selenium-extra-api',
     ],
     entry_points={
         'nose.plugins.0.10': [
