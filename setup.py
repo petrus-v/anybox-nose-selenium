@@ -13,10 +13,11 @@ setup(
     install_requires=[
         'nose',
         'selenium',
-        'selenium-extra-api',
+        'selenium-extra-api==0.0.1',
     ],
     dependency_links=[
-        'http://github.com/petrus-v/selenium-extra-api.git@master#egg=selenium-extra-api',
+        'https://github.com/petrus-v/selenium-extra-api.git@master#'
+        'egg=selenium-extra-api-0.0.1',
     ],
     entry_points={
         'nose.plugins.0.10': [
