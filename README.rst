@@ -2,6 +2,10 @@
 Anybox-nose-selenium
 ====================
 
+.. image:: https://api.travis-ci.org/petrus-v/anybox-nose-selenium.svg?branch=master
+   :target: https://travis-ci.org/petrus-v/anybox-nose-selenium
+   :alt: Travis
+
 anybox-nose-selenium is a plugin for nose that provides support to launch
 selenium tests, the same test case is launched over all browsers you define in
 parallel.
