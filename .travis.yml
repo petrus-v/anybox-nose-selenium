@@ -16,6 +16,8 @@ before_install:
   - docker run -d -p 4444:4444 --name selenium-hub -e GRID_TIMEOUT=10000 selenium/hub
   - docker run -d --dns 8.8.8.8 --link selenium-hub:hub selenium/node-firefox
   - docker run -d --dns 8.8.8.8 --link selenium-hub:hub selenium/node-chrome
+install:
+  - pip install selenium
 script:
   - python setup.py install
   - nosetests anybox/nose_selenium/tests/ -v -s --log-config logging.conf

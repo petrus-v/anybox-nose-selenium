@@ -12,12 +12,11 @@ setup(
     packages=['anybox.nose_selenium'],
     install_requires=[
         'nose',
-        'selenium',
-        'selenium-extra-api==0.0.1',
+        'selenium-extra-api',
     ],
     dependency_links=[
-        'https://github.com/petrus-v/selenium-extra-api.git@master#'
-        'egg=selenium-extra-api-0.0.1',
+        'git+https://github.com/petrus-v/selenium-extra-api.git@master#'
+        'egg=selenium-extra-api',
     ],
     entry_points={
         'nose.plugins.0.10': [
