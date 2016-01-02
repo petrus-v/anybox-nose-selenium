@@ -8,12 +8,16 @@ setup(
     long_description=open('README.rst').read(),
     author='Pierre Verkest',
     author_email='pverkest@anybox.fr',
-    url='https://github.com/anybox/anybox-nose-selenium',
+    url='https://github.com/petrus-v/anybox-nose-selenium',
     packages=['anybox.nose_selenium'],
     install_requires=[
         'nose',
         'selenium',
         'selenium-extra-api',
+    ],
+    dependency_links=[
+        'https://github.com/petrus-v/selenium-extra-api.git@master#'
+        'egg=selenium-extra-api',
     ],
     entry_points={
         'nose.plugins.0.10': [

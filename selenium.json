@@ -1,0 +1,31 @@
+{
+  "drivers": [
+    {
+      "class": "selenium_extra.drivers.local.Firefox"
+    },
+    {
+      "class": "selenium_extra.drivers.remote.Grid",
+      "capabilities": {
+          "command_executor": 'http://127.0.0.1:4444/wd/hub'
+      },
+      "request_drivers": [
+        {
+          "browserName": "firefox",
+          "platform": "LINUX",
+          "version": "",
+          "capabilities": {
+          }
+        },
+        {
+          "browserName": "chrome",
+          "platform": "LINUX",
+          "version": "",
+          "capabilities": {
+          }
+        }
+      ]
+    }
+  ],
+  "global_capabilities": {
+  }
+}

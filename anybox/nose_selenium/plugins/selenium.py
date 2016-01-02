@@ -1,7 +1,7 @@
 import logging
 import os
 from anybox.nose_selenium.selenium import SeleniumTestCase
-from selenium_extra.driver import Driver
+from selenium_extra.conf.configurator import Configurator
 from nose.plugins import Plugin
 from nose.loader import TestLoader
 
@@ -47,7 +47,8 @@ class Selenium(Plugin):
             return
         self.config_file = options.selenium_config
         self.skip = options.selenium_skip
-        self.drivers = [Driver('firefox'), Driver('chrome')]
+        selenium_conf = Configurator(self.config_file)
+        self.drivers = selenium_conf.get_drivers()
 
     def prepareTestLoader(self, loader):
         """Capture loader
@@ -71,8 +72,8 @@ class Selenium(Plugin):
 
                     new_class = A
                     new_class.driver = driver
-                    new_class.__name__ = "%s_sp_%s" % (driver.name,
-                                                       testCaseClass.__name__)
+                    new_class.__name__ = "%s_%s" % (driver.name,
+                                                    testCaseClass.__name__)
                     new_class.__module__ = testCaseClass.__module__
                     loaded_suite.append(loader.suiteClass(
                         map(new_class, test_case_names)))
@@ -86,15 +87,12 @@ class Selenium(Plugin):
         class as generate in loadTestsFromTestCase"""
         driver = None
         prefix = None
-        print os.getpid(), name, module
-        if name.startswith('firefox_sp_'):
-            prefix = 'firefox_sp_'
-            name = name[len(prefix):]
-            driver = self.drivers[0]
-        if name.startswith('chrome_sp_'):
-            prefix = 'chrome_sp_'
-            name = name[len(prefix):]
-            driver = self.drivers[1]
+        for d in self.drivers:
+            if name.startswith(d.name):
+                prefix = "%s_" % d.name
+                name = name[len(prefix):]
+                driver = d
+                continue
         if not driver or not module:
             return
         parts = name.split(".")
