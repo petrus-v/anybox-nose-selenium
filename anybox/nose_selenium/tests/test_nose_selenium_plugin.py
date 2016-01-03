@@ -21,9 +21,13 @@ class TestNoseSeleniumPluginMonoProcess(PluginTester, TestCase):
                'grid_firefox__LINUX_MyTestCase) ... ok' in self.output
         assert 'test_anybox_website (examples.test_simple_case.' \
                'grid_chrome__LINUX_MyTestCase) ... ok' in self.output
+        assert 'test_anybox_website (examples.test_simple_case.' \
+               'local_firefox_MyTestCase) ... ok' in self.output
+        assert 'test_anybox_website (examples.test_simple_case.' \
+               'local_firefox_MyTestCase) ... ok' in self.output
         assert 'test_basic (examples.test_simple_case.' \
                'NormalTestCase) ... ok' in self.output
-        assert 'Ran 5 tests in' in self.output
+        assert 'Ran 7 tests in' in self.output
 
 
 class TestNoseSeleniumPluginSkip(PluginTester, TestCase):
