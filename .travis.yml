@@ -21,4 +21,4 @@ install:
 script:
   - python setup.py install
   - nosetests anybox/nose_selenium/tests/ -v -s --log-config logging.conf
-  - nosetests examples/ -v -s --log-config logging.conf --with-selenium --processes 2 --process-timeout 5
+  - nosetests examples/ -v -s --log-config logging.conf --with-selenium --processes 2 --process-timeout 30
