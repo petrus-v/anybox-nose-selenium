@@ -130,5 +130,7 @@ In development:
 Know issues
 ===========
 
+* I wonder why In travis I need to install this nose plugin with ``develop``
+  to be detect by nose plugin manager?
 * It looks like setupClass is called Twice in multiprocess
 * There is something wrong unittesting selenium nose pluggin in multiprocess
