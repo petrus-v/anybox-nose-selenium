@@ -10,6 +10,7 @@ setup(
     author_email='pverkest@anybox.fr',
     url='https://github.com/petrus-v/anybox-nose-selenium',
     packages=[
+        'anybox'
         'anybox.nose_selenium',
         'anybox.nose_selenium.plugins',
     ],

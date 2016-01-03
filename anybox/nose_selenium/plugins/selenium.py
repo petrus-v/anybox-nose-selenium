@@ -26,7 +26,6 @@ except ImportError:
 
 class Selenium(Plugin):
     name = 'selenium'
-    loader = None
 
     def options(self, parser, env=os.environ):
         super(Selenium, self).options(parser, env=env)
